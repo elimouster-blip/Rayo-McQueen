@@ -1,0 +1,758 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Empleos | AutoEvolution</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                linear-gradient(
+                    rgba(5, 10, 15, 0.92),
+                    rgba(5, 10, 15, 0.96)
+                ),
+                url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=80");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+            color: white;
+
+            min-height: 100vh;
+
+            padding: 40px 20px;
+        }
+
+
+        /* =========================
+           ENCABEZADO
+        ========================= */
+
+        .encabezado {
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+
+        .encabezado h1 {
+
+            font-size: 48px;
+
+            color: #00c3ff;
+
+            margin-bottom: 15px;
+        }
+
+
+        .encabezado p {
+
+            color: #c8d0d8;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           BOTÓN REGRESAR
+        ========================= */
+
+        .regresar {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 12px 22px;
+
+            background: #17232e;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            border: 1px solid #344452;
+
+            transition: 0.3s;
+        }
+
+
+        .regresar:hover {
+
+            background: #00a8dc;
+
+            border-color: #00a8dc;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           CONTENEDOR
+        ========================= */
+
+        .contenedor {
+
+            max-width: 1000px;
+
+            margin: 30px auto;
+
+            background: rgba(15, 22, 30, 0.97);
+
+            border: 1px solid #283744;
+
+            border-radius: 15px;
+
+            padding: 45px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.5);
+        }
+
+
+        .contenedor h2 {
+
+            color: #00c3ff;
+
+            margin-bottom: 30px;
+
+            font-size: 30px;
+        }
+
+
+        /* =========================
+           PUESTOS
+        ========================= */
+
+        .puestos {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 15px;
+
+            margin-bottom: 40px;
+        }
+
+
+        .puesto {
+
+            padding: 20px;
+
+            background: #151f28;
+
+            border: 1px solid #2c3b47;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+
+        .puesto:hover {
+
+            border-color: #00c3ff;
+
+            transform: translateY(-4px);
+        }
+
+
+        .puesto h3 {
+
+            color: #00c3ff;
+
+            margin-bottom: 8px;
+        }
+
+
+        .puesto p {
+
+            color: #aeb8c2;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FORMULARIO
+        ========================= */
+
+        .formulario {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        .campo {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .campo.completo {
+
+            grid-column: 1 / 3;
+        }
+
+
+        .campo label {
+
+            margin-bottom: 8px;
+
+            color: #dce4eb;
+
+            font-weight: bold;
+        }
+
+
+        .campo input,
+        .campo select,
+        .campo textarea {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border-radius: 7px;
+
+            border: 1px solid #344452;
+
+            background: #0d141b;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+
+        .campo input:focus,
+        .campo select:focus,
+        .campo textarea:focus {
+
+            border-color: #00c3ff;
+
+            box-shadow:
+                0 0 8px rgba(0,195,255,0.15);
+        }
+
+
+        .campo textarea {
+
+            min-height: 130px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================
+           ARCHIVO
+        ========================= */
+
+        .archivo {
+
+            border: 1px dashed #40515f;
+
+            padding: 20px;
+
+            border-radius: 8px;
+
+            background: #101820;
+        }
+
+
+        .archivo input {
+
+            border: none;
+
+            padding: 0;
+
+            background: transparent;
+        }
+
+
+        /* =========================
+           BOTÓN ENVIAR
+        ========================= */
+
+        .enviar {
+
+            grid-column: 1 / 3;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #00b7ef;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .enviar:hover {
+
+            background: #008bb8;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(0,195,255,0.2);
+        }
+
+
+        /* =========================
+           MENSAJE
+        ========================= */
+
+        #mensaje {
+
+            display: none;
+
+            margin-top: 25px;
+
+            padding: 20px;
+
+            border-radius: 8px;
+
+            background: #123522;
+
+            border: 1px solid #23854b;
+
+            color: #9dffbd;
+
+            text-align: center;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .encabezado h1 {
+
+                font-size: 35px;
+            }
+
+
+            .contenedor {
+
+                padding: 25px;
+            }
+
+
+            .formulario {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .campo.completo {
+
+                grid-column: auto;
+            }
+
+
+            .enviar {
+
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ENCABEZADO -->
+
+    <header class="encabezado">
+
+        <h1>💼 Trabaja con AutoEvolution</h1>
+
+        <p>
+            Únete a nuestro equipo y forma parte de la evolución
+            de la industria automotriz.
+        </p>
+
+
+        <a href="index.html" class="regresar">
+    ← Regresar a AutoEvolution
+</a>
+
+    </header>
+
+
+
+    <!-- CONTENIDO -->
+
+    <main class="contenedor">
+
+
+        <!-- PUESTOS -->
+
+        <h2>🚗 Puestos disponibles</h2>
+
+
+        <div class="puestos">
+
+
+            <div class="puesto">
+
+                <h3>🔧 Técnico automotriz</h3>
+
+                <p>
+                    Mantenimiento, diagnóstico y reparación
+                    de vehículos.
+                </p>
+
+            </div>
+
+
+            <div class="puesto">
+
+                <h3>⚡ Técnico eléctrico</h3>
+
+                <p>
+                    Especialista en sistemas eléctricos
+                    y vehículos eléctricos.
+                </p>
+
+            </div>
+
+
+            <div class="puesto">
+
+                <h3>💻 Desarrollador</h3>
+
+                <p>
+                    Desarrollo de sistemas y tecnologías
+                    para la industria automotriz.
+                </p>
+
+            </div>
+
+
+            <div class="puesto">
+
+                <h3>🎨 Diseñador automotriz</h3>
+
+                <p>
+                    Diseño y desarrollo visual de vehículos
+                    y productos automotrices.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FORMULARIO -->
+
+        <h2>📝 Solicitud de empleo</h2>
+
+
+        <form
+            class="formulario"
+            id="formularioEmpleo"
+        >
+
+
+            <!-- NOMBRE -->
+
+            <div class="campo">
+
+                <label for="nombre">
+                    Nombre completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Ej. Juan Pérez"
+                    required
+                >
+
+            </div>
+
+
+            <!-- EDAD -->
+
+            <div class="campo">
+
+                <label for="edad">
+                    Edad
+                </label>
+
+                <input
+                    type="number"
+                    id="edad"
+                    min="18"
+                    max="70"
+                    placeholder="Ej. 20"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CORREO -->
+
+            <div class="campo">
+
+                <label for="correo">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="correo"
+                    placeholder="ejemplo@gmail.com"
+                    required
+                >
+
+            </div>
+
+
+            <!-- TELEFONO -->
+
+            <div class="campo">
+
+                <label for="telefono">
+                    Número de teléfono
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefono"
+                    placeholder="Ej. 5555-5555"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PUESTO -->
+
+            <div class="campo completo">
+
+                <label for="puesto">
+                    Puesto al que deseas aplicar
+                </label>
+
+                <select id="puesto" required>
+
+                    <option value="">
+                        Selecciona un puesto
+                    </option>
+
+                    <option>
+                        Técnico automotriz
+                    </option>
+
+                    <option>
+                        Técnico eléctrico
+                    </option>
+
+                    <option>
+                        Desarrollador
+                    </option>
+
+                    <option>
+                        Diseñador automotriz
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- EXPERIENCIA -->
+
+            <div class="campo completo">
+
+                <label for="experiencia">
+                    Experiencia laboral
+                </label>
+
+                <textarea
+                    id="experiencia"
+                    placeholder="Cuéntanos sobre tu experiencia..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- ESTUDIOS -->
+
+            <div class="campo completo">
+
+                <label for="estudios">
+                    Formación académica
+                </label>
+
+                <textarea
+                    id="estudios"
+                    placeholder="Escribe tus estudios o preparación..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- CURRICULUM -->
+
+            <div class="campo completo">
+
+                <label>
+                    📎 Curriculum Vitae
+                </label>
+
+                <div class="archivo">
+
+                    <input
+                        type="file"
+                        id="curriculum"
+                        accept=".pdf,.doc,.docx"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÓN -->
+
+            <button
+                type="submit"
+                class="enviar"
+            >
+                🚀 Enviar solicitud
+            </button>
+
+
+        </form>
+
+
+        <!-- MENSAJE -->
+
+        <div id="mensaje">
+
+            ✅ <strong>¡Solicitud enviada!</strong>
+
+            <br>
+
+            Gracias por tu interés en formar parte
+            de AutoEvolution.
+
+            <br>
+
+            Revisaremos tu información y nos pondremos
+            en contacto contigo.
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const formulario =
+            document.getElementById("formularioEmpleo");
+
+        const mensaje =
+            document.getElementById("mensaje");
+
+
+        formulario.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+                
+
+                mensaje.style.display = "block";
+
+
+                formulario.reset();
+
+
+                mensaje.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+```

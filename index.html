@@ -1,0 +1,824 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>La evolucion automotriz</title>
+
+    <style>
+        /* ==============================
+           CONFIGURACIÓN GENERAL
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b0f14;
+            color: white;
+        }
+
+
+        /* ==============================
+           BARRA LATERAL
+        ============================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: #111820;
+            border-right: 2px solid #26313c;
+
+            padding: 25px 15px;
+
+            z-index: 1000;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo h1 {
+            font-size: 25px;
+            color: #00c3ff;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: #8995a3;
+            margin-top: 5px;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu li {
+            margin: 8px 0;
+        }
+
+        .menu a {
+            display: block;
+
+            color: #dce4eb;
+            text-decoration: none;
+
+            padding: 13px 15px;
+
+            border-radius: 8px;
+
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            background: #00a8dc;
+            color: white;
+            transform: translateX(5px);
+        }
+
+
+        /* ==============================
+           CONTENIDO
+        ============================== */
+
+        .contenido {
+            margin-left: 250px;
+        }
+
+
+        /* ==============================
+           INICIO
+        ============================== */
+
+        #inicio {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 50px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.65),
+                    rgba(0,0,0,0.8)
+                ),
+                url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        #inicio h2 {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        #inicio h2 span {
+            color: #00c3ff;
+        }
+
+        #inicio p {
+            max-width: 750px;
+
+            font-size: 20px;
+            line-height: 1.7;
+
+            color: #d6dce2;
+        }
+
+        .boton {
+            margin-top: 30px;
+
+            padding: 14px 28px;
+
+            background: #00b7ef;
+
+            color: white;
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            background: #008bb8;
+            transform: scale(1.05);
+        }
+
+
+        /* ==============================
+           SECCIONES
+        ============================== */
+
+        section {
+            min-height: 100vh;
+
+            padding: 80px 70px;
+        }
+
+        section h2 {
+            font-size: 40px;
+            margin-bottom: 25px;
+
+            color: #00c3ff;
+        }
+
+        section p {
+            font-size: 17px;
+            line-height: 1.8;
+
+            color: #c8d0d8;
+
+            max-width: 1000px;
+        }
+
+
+        /* ==============================
+           TARJETAS
+        ============================== */
+
+        .tarjetas {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 25px;
+
+            margin-top: 40px;
+        }
+
+        .tarjeta {
+            background: #151d26;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            border: 1px solid #273440;
+
+            transition: 0.3s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-8px);
+
+            border-color: #00c3ff;
+
+            box-shadow:
+                0 10px 30px rgba(0,195,255,0.15);
+        }
+
+        .tarjeta h3 {
+            color: #00c3ff;
+
+            margin-bottom: 15px;
+
+            font-size: 23px;
+        }
+
+        .tarjeta p {
+            font-size: 15px;
+        }
+
+
+        /* ==============================
+           LÍNEA DEL TIEMPO
+        ============================== */
+
+        .timeline {
+            margin-top: 40px;
+
+            border-left: 3px solid #00c3ff;
+
+            padding-left: 30px;
+        }
+
+        .evento {
+            background: #151d26;
+
+            margin-bottom: 25px;
+
+            padding: 25px;
+
+            border-radius: 10px;
+        }
+
+        .evento h3 {
+            color: #00c3ff;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* ==============================
+           FORMULARIOS
+        ============================== */
+
+        .formulario {
+            max-width: 600px;
+
+            margin-top: 30px;
+        }
+
+        .formulario input,
+        .formulario textarea,
+        .formulario select {
+
+            width: 100%;
+
+            padding: 14px;
+
+            margin-bottom: 15px;
+
+            background: #151d26;
+
+            color: white;
+
+            border: 1px solid #34414e;
+
+            border-radius: 7px;
+
+            outline: none;
+        }
+
+        .formulario input:focus,
+        .formulario textarea:focus,
+        .formulario select:focus {
+            border-color: #00c3ff;
+        }
+
+        .formulario textarea {
+            height: 130px;
+            resize: none;
+        }
+
+        .formulario button {
+            padding: 13px 25px;
+
+            background: #00b7ef;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .formulario button:hover {
+            background: #008bb8;
+        }
+
+
+        /* ==============================
+           PIE DE PÁGINA
+        ============================== */
+
+        footer {
+            background: #080b0f;
+
+            padding: 30px;
+
+            text-align: center;
+
+            color: #78838e;
+        }
+
+
+        /* ==============================
+           VENTANA DE BIENVENIDA
+        ============================== */
+
+        .bienvenida {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0,0,0,0.92);
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 9999;
+
+            animation: desaparecer 1s ease 3s forwards;
+        }
+
+        .bienvenida-contenido {
+            text-align: center;
+        }
+
+        .bienvenida h2 {
+            font-size: 50px;
+            color: #00c3ff;
+        }
+
+        .bienvenida p {
+            color: #dce4eb;
+            margin-top: 10px;
+        }
+
+        @keyframes desaparecer {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .contenido {
+                margin-left: 200px;
+            }
+
+            #inicio h2 {
+                font-size: 40px;
+            }
+
+            section {
+                padding: 50px 30px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         VENTANA DE BIENVENIDA
+    ============================== -->
+
+    <div class="bienvenida">
+
+        <div class="bienvenida-contenido">
+
+            <h2>🚗 Evolucion de los carros CUCHUAU</h2>
+
+            <p>
+                Bienvenido a la paguina del sexo :D
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==============================
+         BARRA LATERAL
+    ============================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>🚗 Rayo McQueen</h1>
+
+            <p>Historia y tecnología automotriz</p>
+
+        </div>
+
+
+        <ul class="menu">
+
+            <li>
+                <a href="#inicio">🏠 Inicio</a>
+            </li>
+
+            <li>
+                <a href="#historia">📜 Historia</a>
+            </li>
+
+            <li>
+                <a href="#primeros">🚘 Primeros autos</a>
+            </li>
+
+            <li>
+                <a href="#evolucion">⚙️ Evolución</a>
+            </li>
+
+            <li>
+                <a href="#electricos">🔋 Motores eléctricos</a>
+            </li>
+
+            <li>
+                <a href="#futuro">🚀 Futuro</a>
+            </li>
+
+            <li>
+                <a href="#contactos">📞 Contactos</a>
+            </li>
+
+            <li>
+                <a href="#empleos">💼 Empleos</a>
+            </li>
+
+            <li>
+                <a href="#nosotros">ℹ️ Nosotros</a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+
+    <!-- ==============================
+         CONTENIDO PRINCIPAL
+    ============================== -->
+
+    <main class="contenido">
+
+
+        <!-- INICIO -->
+
+        <section id="inicio">
+
+            <h2>
+                La evolución del <span>automóvil</span>
+            </h2>
+
+            <p>
+                Desde los primeros vehículos impulsados por motores de combustión
+                hasta los modernos automóviles eléctricos, la industria automotriz
+                ha experimentado una transformación increíble.
+            </p>
+
+            <a href="#historia" class="boton">
+                Conocer la historia
+            </a>
+
+        </section>
+        <section id="empleos">
+
+    <h2>💼 Empleos</h2>
+
+    <p>
+        Forma parte de nuestro equipo. Conoce nuestras oportunidades
+        laborales y encuentra el puesto ideal para ti.
+    </p>
+
+    <br>
+
+<a href="empleos.html" class="boton">
+    💼 Ver empleos disponibles →
+</a>
+
+</section>
+
+
+        <!-- HISTORIA -->
+
+        <section id="historia">
+
+            <h2>📜 Historia del automóvil</h2>
+
+            <p>
+                La historia del automóvil comenzó con los primeros intentos
+                de crear vehículos capaces de desplazarse por sus propios medios.
+                Con el paso del tiempo aparecieron motores más eficientes,
+                mejores sistemas de seguridad y nuevas tecnologías.
+            </p>
+
+
+            <div class="timeline">
+
+                <div class="evento">
+
+                    <h3>1886 - Primer automóvil</h3>
+
+                    <p>
+                        Karl Benz desarrolló uno de los primeros automóviles
+                        impulsados por un motor de combustión interna.
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>1908 - Producción en masa</h3>
+
+                    <p>
+                        La producción en masa permitió fabricar automóviles
+                        a mayor escala y hacerlos más accesibles.
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>1950 - Nuevas tecnologías</h3>
+
+                    <p>
+                        Los vehículos comenzaron a incorporar mejores motores,
+                        sistemas de seguridad y diseños más modernos.
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>2000 - Revolución tecnológica</h3>
+
+                    <p>
+                        La electrónica y las computadoras comenzaron a formar
+                        una parte fundamental de los automóviles.
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>Actualidad - Autos eléctricos</h3>
+
+                    <p>
+                        Los vehículos eléctricos están transformando nuevamente
+                        la industria automotriz.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PRIMEROS AUTOS -->
+
+        <section id="primeros">
+
+            <h2>🚘 Los primeros automóviles</h2>
+
+            <p>
+                Los primeros automóviles eran muy diferentes a los actuales.
+                Tenían diseños simples, velocidades reducidas y sistemas
+                mecánicos mucho menos desarrollados.
+            </p>
+
+
+            <div class="tarjetas">
+
+                <div class="tarjeta">
+
+                    <h3>⚙️ Motor de combustión</h3>
+
+                    <p>
+                        Los motores de combustión utilizan combustible para
+                        generar energía y mover el vehículo.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🛞 Sistemas mecánicos</h3>
+
+                    <p>
+                        Los primeros vehículos utilizaban sistemas mecánicos
+                        relativamente sencillos.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🚗 Diseños clásicos</h3>
+
+                    <p>
+                        Los automóviles antiguos tenían diseños completamente
+                        diferentes a los vehículos modernos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- EVOLUCIÓN -->
+
+        <section id="evolucion">
+
+            <h2>⚙️ Evolución tecnológica</h2>
+
+            <p>
+                La industria automotriz comenzó a incorporar nuevas tecnologías
+                para mejorar el rendimiento, la comodidad y la seguridad.
+            </p>
+
+
+            <div class="tarjetas">
+
+                <div class="tarjeta">
+
+                    <h3>🛡️ Seguridad</h3>
+
+                    <p>
+                        Se incorporaron cinturones de seguridad, bolsas de aire,
+                        frenos avanzados y sistemas de asistencia al conductor.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>💻 Computadoras</h3>
+
+                    <p>
+                        Los vehículos modernos utilizan computadoras para
+                        controlar diferentes sistemas del automóvil.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>📡 Conectividad</h3>
+
+                    <p>
+                        Actualmente muchos vehículos cuentan con GPS,
+                        conexión a Internet y sistemas multimedia.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- MOTORES ELÉCTRICOS -->
+
+        <section id="electricos">
+
+            <h2>🔋 Motores eléctricos</h2>
+
+            <p>
+                Los vehículos eléctricos utilizan motores eléctricos alimentados
+                principalmente por baterías. Esta tecnología representa una de
+                las transformaciones más importantes de la industria automotriz.
+            </p>
+
+
+            <div class="tarjetas">
+
+                <div class="tarjeta">
+
+                    <h3>🔋 Baterías</h3>
+
+                    <p>
+                        Almacenan la energía necesaria para alimentar el motor
+                        eléctrico del vehículo.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>⚡ Motor eléctrico</h3>
+
+                    <p>
+                        Convierte la energía eléctrica en movimiento para
+                        impulsar las ruedas.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🌱 Menos emisiones</h3>
+
+                    <p>
+                        Los vehículos totalmente eléctricos no producen emisiones
+                        directas por el escape durante su funcionamiento.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <h3>🔌 Carga</h3>
+
+                    <p>
+                        Las baterías pueden recargarse mediante estaciones de
+                        carga o sistemas domésticos compatibles.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FUTURO -->
+
+        <section id="futuro">
+
+            <h2>🚀 El futuro del automóvil</h2>
+
+            <p>
+                El futuro de la industria automotriz está relacionado con
+                tecnologías como la inteligencia artificial, la conducción
+                autónoma, nuevas baterías y vehículos cada
